@@ -11,7 +11,12 @@
 
     export default {
         components: { Message },
-        props: ['messages', 'sender'],
+        props: ['sender'],
+        computed: {
+            messages() {
+                return this.$store.state.messages
+            }
+        },
         methods: {
             bySender: (msg) => msg.sender === this.sender
         }
