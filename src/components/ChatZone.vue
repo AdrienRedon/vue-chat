@@ -7,7 +7,6 @@
 
 <script>
     export default {
-        props: ['sender'],
         methods: {
             onSubmit (e) {
                 let message = e.target.querySelector('textarea').value;
