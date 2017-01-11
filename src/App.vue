@@ -1,6 +1,6 @@
 <template>
     <div id="container">
-        <list-messages class="list" :messages="messages" :sender="sender"></list-messages>
+        <list-messages class="list" :sender="sender"></list-messages>
         <chat-zone></chat-zone>
     </div>
 </template>
@@ -14,15 +14,15 @@
         components: { ListMessages, ChatZone },
         data () {
             return {
-                messages: [],
                 sender: ''
             }
         },
+        computed: {
+            messages () {
+                return this.$store.state.messages
+            }
+        }
         created() {
-            this.$options.sockets.message = (data) => {
-                this.messages.push(data)
-            };
-
             this.$options.sockets.new_client =  (sender) => console.log(sender, 'join the chat');
 
             this.sender = prompt('Who are you ?');
