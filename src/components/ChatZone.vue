@@ -1,16 +1,20 @@
 <template>
     <form @submit.prevent="onSubmit" class="container">
-        <textarea>Type your message</textarea>
+        <textarea v-model="message" placeholder="Type your message here"></textarea>
         <button type="submit">Send</button>
     </form >
 </template>
 
 <script>
     export default {
+        data () {
+            return {
+                message: ''
+            }
+        },
         methods: {
             onSubmit (e) {
-                let message = e.target.querySelector('textarea').value;
-                this.$socket.emit('message', message);
+                this.$socket.emit('message', this.message);
             }
         }
     }
