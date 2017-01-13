@@ -21,7 +21,7 @@
             messages () {
                 return this.$store.state.messages
             }
-        }
+        },
         created() {
             this.$options.sockets.new_client =  (sender) => console.log(sender, 'join the chat');
 
