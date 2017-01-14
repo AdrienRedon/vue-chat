@@ -2,17 +2,21 @@
 
 > A Vue.js project
 
-## Build Setup
+## How to chat
 
+First, you have to write your firebase cloud messaging server key in a 'fcm-config.js' file like this:
+
+```js
+module.exports = 'your_server_key';
+```
+then you just run it:
 ``` bash
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
 # build for production with minification
 npm run build
-```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# run node server
+npm start
+```
