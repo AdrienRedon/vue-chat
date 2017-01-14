@@ -40,7 +40,7 @@
                 }) // token to send to the server
                 .catch(err => console.log('Error occured', err));
             this.setSender(prompt('Who are you ?'));
-            messaging.onMessage((data) => this.addMessage(data));
+            // messaging.onMessage((data) => this.addMessage(data));
 
         },
         methods: {

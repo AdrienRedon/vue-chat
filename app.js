@@ -21,7 +21,6 @@ app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
 io.sockets.on('connection', (socket) => {
     socket.on('new_client', (push_id) => {
-        console.log(push_id);
         socket.push_id = push_id;
         listId.push(push_id)
     });
@@ -46,10 +45,9 @@ io.sockets.on('connection', (socket) => {
                     'Authorization': 'key=' + serverKey,
                     'Content-Type': 'application/json'
                 }
-            }).then(() => console.log('notif sent'))
-            .catch((err) => console.log(err));
+            }).catch((err) => console.log(err));
         }
-        io.sockets.emit('message', {sender: sender, txt: message, created_at: new Date()})
+        io.sockets.emit('message', {sender: sender, txt: message, created_at: new Date()});
     }); 
 });
 
