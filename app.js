@@ -8,8 +8,6 @@ const http = require("http");
 const fs = require('fs');
 const path = require('path');   
 
-console.log(serverKey);
-
 let app = express();
 let server = http.createServer(app);
 let io = socketio.listen(server);
@@ -37,7 +35,7 @@ io.sockets.on('connection', (socket) => {
                 
                 'notification': {
                     'title': 'New message', 
-                    'body': sender + ':' + message.substring(0,50);
+                    'body': sender + ':' + message.substring(0,50)
                 }
             };
 
