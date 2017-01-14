@@ -6,27 +6,49 @@
 </template>
 
 <script>
+    import firebase from 'firebase';
     import ListMessages from './components/ListMessages.vue';
     import ChatZone from './components/ChatZone.vue';
+    import { mapGetters, mapActions } from 'vuex';
 
     export default {
         name: 'app',
         components: { ListMessages, ChatZone },
-        data () {
-            return {
-                sender: ''
-            }
-        },
         computed: {
-            messages () {
-                return this.$store.state.messages
-            }
+            ...mapGetters({
+                sender: 'chat_sender',
+                push_id: 'chat_push_id',
+            })
         },
         created() {
-            this.$options.sockets.new_client =  (sender) => console.log(sender, 'join the chat');
+            this.$options.sockets.message =  (message) => this.addMessage(message);
+            
+            const config = {
+                apiKey: "AIzaSyArEaIk3iFNYQbB9u0eW_UVPB5GMaz1aV4",
+                authDomain: "amp-pwa-vue.firebaseapp.com",
+                databaseURL: "https://amp-pwa-vue.firebaseio.com",
+                storageBucket: "amp-pwa-vue.appspot.com",
+                messagingSenderId: "583154623608"
+            };
+            firebase.initializeApp(config);
+            const messaging = firebase.messaging();
+            messaging.requestPermission()
+                .then(() => messaging.getToken())
+                .then((token) => {
+                    this.$socket.emit('new_client', token);
+                    this.setPushId(token);
+                }) // token to send to the server
+                .catch(err => console.log('Error occured', err));
+            this.setSender(prompt('Who are you ?'));
+            messaging.onMessage((data) => this.addMessage(data));
 
-            this.sender = prompt('Who are you ?');
-            this.$socket.emit('new_client', this.sender);
+        },
+        methods: {
+            ...mapActions({
+                setSender: 'chat_setSender',
+                setPushId: 'chat_setPushId',
+                addMessage: 'chat_addMessage',
+            })
         }
     }
 </script>

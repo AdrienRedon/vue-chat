@@ -6,15 +6,24 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'; 
+
     export default {
         data () {
             return {
                 message: ''
             }
         },
+        computed: {
+            ...mapGetters({
+                sender: 'chat_sender',
+                push_id: 'chat_push_id',
+            })
+        },
         methods: {
-            onSubmit (e) {
-                this.$socket.emit('message', this.message);
+            onSubmit () {
+                this.$socket.emit('message', this.message, this.sender, this.push_id);
+                this.message = '';
             }
         }
     }

@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
+import axios from 'axios';
 import VueSocketio from 'vue-socket.io';
-import store from './store'
+import App from './App.vue';
+import store from './store';
 
 Vue.use(VueSocketio, 'http://localhost:1337');
 

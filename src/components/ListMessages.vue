@@ -8,14 +8,15 @@
 
 <script>
     import Message from './Message.vue';
+    import { mapGetters } from 'vuex';
 
     export default {
         components: { Message },
-        props: ['sender'],
         computed: {
-            messages() {
-                return this.$store.state.messages
-            }
+            ...mapGetters({
+                messages: 'chat_messages',
+                sender: 'chat_sender'
+            })
         },
         methods: {
             bySender: (msg) => msg.sender === this.sender
