@@ -1,12 +1,13 @@
 <template>
     <div class="list-messages">
         <message v-for="message in messages" :class="{'bySender': sender === message.sender}">
-            {{message.txt}} by {{ message.sender }}
+            {{message.txt}} by {{ message.sender }} {{ postedOn(message) }}
         </message>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
     import Message from './Message.vue';
     import { mapGetters } from 'vuex';
 
@@ -19,7 +20,12 @@
             })
         },
         methods: {
-            bySender: (msg) => msg.sender === this.sender
+            bySender (msg) {
+                return msg.sender === this.sender;
+            },
+            postedOn (msg) {
+                return moment(msg.created_at).fromNow();
+            }
         }
     }
 </script>

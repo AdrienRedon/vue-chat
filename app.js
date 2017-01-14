@@ -49,7 +49,7 @@ io.sockets.on('connection', (socket) => {
             }).then(() => console.log('notif sent'))
             .catch((err) => console.log(err));
         }
-        io.sockets.emit('message', {sender: sender, txt: message})
+        io.sockets.emit('message', {sender: sender, txt: message, created_at: new Date()})
     }); 
 });
 
