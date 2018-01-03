@@ -21,7 +21,7 @@
             })
         },
         created() {
-            this.$options.sockets.message =  (message) => this.addMessage(message);
+            this.$options.sockets.message = (message) => this.addMessage(message);
             
             const config = {
                 apiKey: "AIzaSyArEaIk3iFNYQbB9u0eW_UVPB5GMaz1aV4",
@@ -40,8 +40,6 @@
                 }) // token to send to the server
                 .catch(err => console.log('Error occured', err));
             this.setSender(prompt('Who are you ?'));
-            // messaging.onMessage((data) => this.addMessage(data));
-
         },
         methods: {
             ...mapActions({
