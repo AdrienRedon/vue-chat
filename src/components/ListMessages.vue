@@ -1,7 +1,7 @@
 <template>
     <div class="list-messages">
         <message v-for="message in messages" :class="{'bySender': sender === message.sender}">
-            {{message.txt}} by {{ message.sender }} {{ postedOn(message) }}
+            {{ message.txt }} by {{ message.sender }} {{ postedOn(message) }}
         </message>
     </div>
 </template>
@@ -16,7 +16,7 @@
         computed: {
             ...mapGetters({
                 messages: 'chat_messages',
-                sender: 'chat_sender'
+                sender: 'chat_sender',
             })
         },
         methods: {
